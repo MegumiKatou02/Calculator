@@ -1,3 +1,5 @@
+import { evaluate } from "mathjs";
+
 const op: Array<string> = ['+', '-', '*', '/'];
 
 export function CheckHandleError(strInput: string): boolean {
@@ -10,4 +12,10 @@ export function CheckHandleError(strInput: string): boolean {
 }
 export function Delete(str: string): string {
     return str.slice(0, -1);
+}
+
+export function Equal(strInput: string) {
+    const expression = strInput;
+    const result = evaluate(expression);
+    return result;
 }

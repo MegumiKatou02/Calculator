@@ -1,5 +1,5 @@
 <template>
-<ErrorCatch/>
+<ErrorCatch :isError="isError"/>
 <div class="calculator">
     <input
       class="input-display" 
@@ -26,6 +26,7 @@ import * as calculator from "./calc/calc.ts";
 import ErrorCatch from "./components/ErrorCatch.vue";
 
 const input = ref<string>("");
+const isError = ref<boolean>(false);
 
 const buttons = ref([
   "7", "8", "9", "/",
@@ -40,17 +41,29 @@ const handleClick = (button: string) => {
     try {
       if (calculator.CheckHandleError(input.value)) {
           input.value = eval(input.value).toString();
+          isError.value = false;
       }
-      input.value = eval(input.value).toString();
+      else {
+        // input.value = eval(input.value).toString();
+        isError.value = true;
+        console.log("here1");
+        
+      }
     } catch (error) {
-      // input.value = "Error";
+        isError.value = true;
+        console.log("here2");
     }
   } 
   else if (button === "cle") {
     input.value = "";
   } 
   else if(button == "del") {
-    input.value = calculator.Delete(eval(input.value).toString());
+    try {
+      input.value = calculator.Delete(eval(input.value).toString());
+    }
+    catch(error) {
+      console.log("loi");
+    }
   }
   else {
     input.value += button; // string
@@ -59,7 +72,19 @@ const handleClick = (button: string) => {
 
 const handleKeyDown = (event: KeyboardEvent) => {
   if(event.key === "Enter") {
-    input.value = "Hello";
+    try {
+      if (calculator.CheckHandleError(input.value)) {
+          input.value = eval(input.value).toString();
+          isError.value = false;
+      }
+      else {
+        isError.value = true;
+        // input.value = eval(input.value).toString();
+        
+      }
+    } catch (error) {
+        isError.value = true;
+    }
   }
 }
 
