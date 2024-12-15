@@ -1,11 +1,10 @@
 <template>
+<ErrorCatch/>
 <div class="calculator">
-    <!-- Sử dụng v-html để áp dụng màu sắc cho các ký tự -->
-    <input 
+    <input
       class="input-display" 
-      
       type="text"
-      v-model="input"
+      v-model="input" 
     >
     <div class="buttons">
       <button
@@ -22,8 +21,9 @@
 
 <script setup lang="ts">
 
-import { ref, computed } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import * as calculator from "./calc/calc.ts";
+import ErrorCatch from "./components/ErrorCatch.vue";
 
 const input = ref<string>("");
 
@@ -43,7 +43,7 @@ const handleClick = (button: string) => {
       }
       input.value = eval(input.value).toString();
     } catch (error) {
-      input.value = "Error";
+      // input.value = "Error";
     }
   } 
   else if (button === "cle") {
@@ -55,13 +55,6 @@ const handleClick = (button: string) => {
   else {
     input.value += button; // string
   }
-
-  const formattedInput = computed(() => {
-  return input.value.split('').map((char) => {
-    const isInvalid = /[^0-9+\-*/.]/.test(char);
-    return `<span style="color: ${isInvalid ? 'red' : 'black'}">${char}</span>`;
-  }).join('');
-});
 };
 
 const handleKeyDown = (event: KeyboardEvent) => {
@@ -70,12 +63,17 @@ const handleKeyDown = (event: KeyboardEvent) => {
   }
 }
 
+onMounted(() => {
+  window.addEventListener("keydown", handleKeyDown);
+})
 
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeyDown);
+})
 
 </script>
 
 <style scoped>
-
 .no-select {
   user-select: none;
   -webkit-user-select: none; 
