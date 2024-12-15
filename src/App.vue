@@ -1,6 +1,6 @@
 <template>
-<ErrorCatch :isError="isError"/>
-<div class="calculator">
+  <ErrorCatch :isError="isError"/>
+  <div class="calculator">
     <input
       class="input-display" 
       type="text"
@@ -16,6 +16,16 @@
         {{ button }}
       </button>
     </div>
+  </div>
+  <div class="controllInput">
+    <button
+      v-for="button in buttonSpecial" 
+      :key="button" 
+      @click="handleClick(button)"
+      class="calc-button special"
+    >
+      {{ button }}
+    </button>
   </div>
 </template>
 
@@ -33,8 +43,12 @@ const buttons = ref([
   "4", "5", "6", "*",
   "1", "2", "3", "-",
   "0", ".", "=", "+",
-  "del", "cle"
+  // "del", "cle"
 ]);
+
+const buttonSpecial = ref([
+  "Delete", "Clear"
+])
 
 const handleClick = (button: string) => {
   if (button === "=") {
@@ -54,10 +68,10 @@ const handleClick = (button: string) => {
         console.log("here2");
     }
   } 
-  else if (button === "cle") {
+  else if (button === "Clear") {
     input.value = "";
   } 
-  else if(button == "del") {
+  else if(button == "Delete") {
     try {
       input.value = calculator.Delete(eval(input.value).toString());
     }
@@ -106,6 +120,13 @@ onUnmounted(() => {
   -ms-user-select: none; 
 }
 
+.controllInput button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+}
+
 .input-display {
   width: 100%;
   height: 40px;
@@ -122,6 +143,7 @@ onUnmounted(() => {
   border: 1px solid #ccc;
   border-radius: 10px;
   text-align: center;
+  background-color: rgb(206, 202, 240);
 }
 
 input {
@@ -137,5 +159,32 @@ button {
   font-size: 20px;
   margin: 5px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #8d7bf3;
+  color: #fff; 
+  transform: scale(1.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+button:active {
+  transform: scale(1.05); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+button:focus {
+  outline: none; 
+}
+
+button.special {
+  border: 1px solid;
+}
+
+button.special:hover {
+  background-color: #d9534f;
+  color: white;
+  transform: scale(1.1);
 }
 </style>
