@@ -19,3 +19,16 @@ export function Equal(strInput: string) {
     const result = evaluate(expression);
     return result;
 }
+
+export function OneNumber(strInput: string) {
+    try {
+        const num: number = Number(strInput);    
+        if(isNaN(num)) {
+            return false;
+        }
+        return true;
+    } 
+    catch (error) {
+        return false;
+    }
+}

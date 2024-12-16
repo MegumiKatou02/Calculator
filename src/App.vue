@@ -1,4 +1,5 @@
 <template>
+  <h2>Calculator <(")</h2>
   <ErrorCatch :isError="isError"/>
   <div class="calculator">
     <input
@@ -53,25 +54,29 @@ const buttonSpecial = ref([
 const handleClick = (button: string) => {
   if (button === "=") {
     try {
-      if (calculator.CheckHandleError(input.value)) {
-          input.value = eval(input.value).toString();
+      if(calculator.OneNumber(input.value)) {
+        input.value = input.value;
+      }
+      else if (calculator.CheckHandleError(input.value)) {
+          // input.value = eval(input.value).toString();
+          input.value = calculator.Equal(input.value);
           isError.value = false;
       }
       else {
         // input.value = eval(input.value).toString();
         isError.value = true;
-        console.log("here1");
         
       }
     } catch (error) {
         isError.value = true;
-        console.log("here2");
     }
   } 
   else if (button === "Clear") {
+    isError.value = false;
     input.value = "";
   } 
   else if(button == "Delete") {
+    isError.value = false;
     try {
       input.value = calculator.Delete(eval(input.value).toString());
     }
@@ -88,12 +93,12 @@ const handleKeyDown = (event: KeyboardEvent) => {
   if(event.key === "Enter") {
     try {
       if (calculator.CheckHandleError(input.value)) {
-          input.value = eval(input.value).toString();
+          // input.value = eval(input.value).toString();
+          input.value = calculator.Equal(input.value);
           isError.value = false;
       }
       else {
         isError.value = true;
-        // input.value = eval(input.value).toString();
         
       }
     } catch (error) {
