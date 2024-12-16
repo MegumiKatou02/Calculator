@@ -1,5 +1,43 @@
-# Vue 3 + TypeScript + Vite
+# Calculator
+  This project is built with Vite, Vue 3, and TypeScript. It serves as a base template for modern frontend development
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 🚀 Features
+- ⚡ Vite: Super fast development server and bundler.
+- 🎨 Vue 3: Modern, progressive JavaScript framework.
+- 🛠 TypeScript: Type-safe development with type inference..
+## 📋 Requirements
+Before running the project, ensure that you have the following installed:
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+- Node.js (v16 or later recommended): Download here
+- npm or Yarn (package manager): Comes with Node.js
+## 💻 Installation Steps
+Follow these steps to set up the project on your local machine:
+
+### 1. Clone the Repository
+
+```git clone https://github.com/your-username/your-repo-name.git``` <br><br>
+Replace `your-username` and `your-repo-name` with the actual repository link.
+
+### 2. Navigate to the Project Directory
+`cd your-repo-name`
+### 3. Install Dependencies
+Run the following command to install the project dependencies:
+
+Using **npm**:
+
+`npm install` <br><br>
+Or using **Yarn**:
+
+`yarn install`
+### 4. Start the Development Server
+To launch the development server, run:
+
+Using **npm**:
+
+`npm run dev` <br><br>
+Or using **Yarn**:
+
+`yarn dev`<br>
+This will start the development server, and you can access the project at:
+👉 `http://localhost:5173/`
+# template
